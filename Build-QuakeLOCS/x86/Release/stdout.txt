@@ -1,0 +1,10 @@
+Command line: C:\Users\Arek\Desktop\QuakeLOCS\Build-QuakeLOCS\x86\Release\QuakeLOCS.exe
+Found SDL version 1.2.15
+Detected 6 CPUs.
+Quake 1.09 (c) id Software
+GLQuake 1.00 (c) id Software
+FitzQuake 0.85 (c) John Fitzgibbons
+FitzQuake SDL port (c) SleepwalkR, Baker
+QuakeSpasm 0.93.1 (c) Ozkan Sezer, Eric Wasylishen & others
+Host_Init
+Playing shareware version.
