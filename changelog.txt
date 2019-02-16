@@ -1,0 +1,14 @@
+//QuakeLOCS changelog
+//Document created by Bartlomiej Duda
+
+
+
+Version 0.93.2 (17.02.2019)
+First successfull trials of Quake output
+Added reading from LOCS config file
+
+
+
+Version 0.93.1
+Initial version for QuakeLOCS, 
+everything is the same as in QuakeSpasm 0.93.1

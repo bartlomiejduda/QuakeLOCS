@@ -1,0 +1,7 @@
+﻿//LOCS main config file
+
+[Available langs]
+ENG=English
+PL=Polski
+FR=French
+GER=German

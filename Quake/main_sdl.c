@@ -99,6 +99,7 @@ static quakeparms_t	parms;
 
 int main(int argc, char *argv[])
 {
+	
 	int		t;
 	double		time, oldtime, newtime;
 

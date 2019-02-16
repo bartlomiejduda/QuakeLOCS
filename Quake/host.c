@@ -839,6 +839,8 @@ void Host_Init (void)
 	Mod_Init ();
 	NET_Init ();
 	SV_Init ();
+	Con_Printf("Starting LOCS...\n");
+	LOCS_Init(); //Bartlomiej Duda
 
 	Con_Printf ("Exe: " __TIME__ " " __DATE__ "\n");
 	Con_Printf ("%4.1f megabyte heap\n", host_parms->memsize/ (1024*1024.0));
