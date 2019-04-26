@@ -7,12 +7,14 @@
 
 // V1.00 14.02.19 Bartlomiej Duda
 // V1.01 19.03.19 Bartlomiej Duda
+// V1.02 26.04.19 Bartlomiej Duda
 
 struct lang_line
 {
 	char  lang_code[10];  // "ENG" by default
 	char  lang[50];		  // "English" by default
 };
+
 
 struct loc_line
 {
@@ -66,19 +68,22 @@ char* str_to_upper(char *input)
 }
 
 
+
 char* str_split_and_get_element(char* a_str, char* a_delimeter, int a_position)
 {
-	char* result_ptr;
+	char* result_ptr = NULL;
 	int counter = 0;
-	int a_str_len = strlen(a_str);
+
 
 	if (a_position <= 0)
-		return "error_split_010";
+		return (char *)"error_split_010";
 
-	char* temp_str = malloc(a_str_len * sizeof(*temp_str));
+	int a_str_len = strlen(a_str);
+	char* temp_str = (char*)malloc(a_str_len * sizeof(*temp_str));
 	strcpy(temp_str, a_str);
 
-	char *ptr = strtok(temp_str, "="); //get first element from string
+
+	char *ptr = strtok(temp_str, a_delimeter); //get first element from string
 
 	while (ptr != NULL) //iterating through splitted elements
 	{
@@ -90,7 +95,7 @@ char* str_split_and_get_element(char* a_str, char* a_delimeter, int a_position)
 
 
 		counter++;
-		ptr = strtok(NULL, "=");
+		ptr = strtok(NULL, a_delimeter);
 		result_ptr = ptr;
 
 		if (counter >= a_position - 1)
@@ -102,13 +107,16 @@ char* str_split_and_get_element(char* a_str, char* a_delimeter, int a_position)
 	}
 
 	if (ptr == NULL && result_ptr == NULL)
-		return "error_split_020"; //a_position is larger than number of splitted elements
+		return (char *)"error_split_020"; //a_position is larger than number of splitted elements
 								  //this error also happens if string cannot be splitted (wrong delimeter for example)
 
 	int res_str_len = strlen(result_ptr);
-	char* result = malloc(res_str_len * sizeof(*result));
+	char* result = (char*)malloc(res_str_len * sizeof(*result));
 	strcpy(result, result_ptr);
+
+	//temp_str = NULL;
 	//free(temp_str);
+
 	return result;
 }
 
@@ -129,8 +137,8 @@ int get_q_global_config()
 
 	int count_tok1 = 0;
 	int count_tok2 = 0;
-	char* current_lang;
-	char* current_lang_code;
+	char p_delim[] = "=";
+	char* ptr_p_delim = p_delim;
 
 
 	while (fgets(line, sizeof line, glob_config_file) != NULL) 
@@ -164,21 +172,10 @@ int get_q_global_config()
 				}
 
 
-				struct lang_line a;
-				*a.lang_code = str_split_and_get_element(line, '=', 1);
-				*a.lang = str_split_and_get_element(line, '=', 2);
-
-				//*line_arr[lang_counter].lang = *(tokens + 0);
-				//line_arr[lang_counter].lang_code = *(tokens + 1);
-				//Con_Printf("####token1: %s, token2: %s \n", tokens[0][0], tokens[0][1]);
-
+				struct lang_line a, *pa = &a;
+				strcpy(a.lang_code, str_split_and_get_element(line, ptr_p_delim, 1));
+				strcpy(a.lang, str_split_and_get_element(line, ptr_p_delim, 2));
 				Con_Printf("####lang: %s, lang_code: %s \n", a.lang, a.lang_code);
-
-				
-
-
-				
-
 
 				
 			}

@@ -1,4 +1,4 @@
-﻿//LOCS main config file
+//LOCS main config file
 
 [Available langs]
 ENG=English
