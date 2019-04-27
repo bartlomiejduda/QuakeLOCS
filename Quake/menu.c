@@ -1252,7 +1252,8 @@ void M_Options_Draw (void)
 
 	// OPT_VIDEO:
 	if (vid_menudrawfn)
-		M_Print (16, 32 + 8*OPT_VIDEO,	"         Video Options");
+		//M_Print (16, 32 + 8*OPT_VIDEO,	"         Video Options222");
+		M_Print(16, 32 + 8 * OPT_VIDEO, get_q_text("TEST_IdEnt", "Video options333"));
 
 // cursor
 	M_DrawCharacter (200, 32 + options_cursor*8, 12+((int)(realtime*4)&1));
@@ -1696,7 +1697,7 @@ void M_Quit_Draw (void) //johnfitz -- modified for new quit message
 		m_state = m_quit;
 	}
 
-	sprintf(msg1, "QuakeSpasm " QUAKESPASM_VER_STRING);
+	sprintf(msg1, "QuakeLOCS " QUAKELOCS_VER_STRING);
 
 	//okay, this is kind of fucked up.  M_DrawTextBox will always act as if
 	//width is even. Also, the width and lines values are for the interior of the box,

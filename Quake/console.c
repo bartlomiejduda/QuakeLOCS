@@ -2,6 +2,7 @@
 Copyright (C) 1996-2001 Id Software, Inc.
 Copyright (C) 2002-2009 John Fitzgibbons and others
 Copyright (C) 2010-2014 QuakeSpasm developers
+Copyright (C) 2019 Bartlomiej Duda
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -1227,7 +1228,7 @@ void Con_DrawConsole (int lines, qboolean drawinput)
 
 //draw version number in bottom right
 	y += 8;
-	q_snprintf (ver, sizeof(ver), "QuakeSpasm " QUAKESPASM_VER_STRING);
+	q_snprintf (ver, sizeof(ver), "QuakeLOCS " QUAKELOCS_VER_STRING);
 	for (x = 0; x < (int)strlen(ver); x++)
 		Draw_Character ((con_linewidth - strlen(ver) + x + 2)<<3, y, ver[x] /*+ 128*/);
 }

@@ -3,6 +3,7 @@ Copyright (C) 1996-2001 Id Software, Inc.
 Copyright (C) 2002-2005 John Fitzgibbons and others
 Copyright (C) 2007-2008 Kristian Duske
 Copyright (C) 2010-2014 QuakeSpasm developers
+Copyright (C) 2019 Bartlomiej Duda
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -137,6 +138,7 @@ int main(int argc, char *argv[])
 	Sys_Printf("FitzQuake %1.2f (c) John Fitzgibbons\n", FITZQUAKE_VERSION);
 	Sys_Printf("FitzQuake SDL port (c) SleepwalkR, Baker\n");
 	Sys_Printf("QuakeSpasm " QUAKESPASM_VER_STRING " (c) Ozkan Sezer, Eric Wasylishen & others\n");
+	Sys_Printf("QuakeLOCS " QUAKELOCS_VER_STRING " (c) Bartlomiej Duda\n");
 
 	Sys_Printf("Host_Init\n");
 	Host_Init();

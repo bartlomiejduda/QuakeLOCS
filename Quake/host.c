@@ -3,6 +3,7 @@ Copyright (C) 1996-2001 Id Software, Inc.
 Copyright (C) 2002-2009 John Fitzgibbons and others
 Copyright (C) 2007-2008 Kristian Duske
 Copyright (C) 2010-2014 QuakeSpasm developers
+Copyright (C) 2019 Bartlomiej Duda
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -231,7 +232,7 @@ void	Host_FindMaxClients (void)
 void Host_Version_f (void)
 {
 	Con_Printf ("Quake Version %1.2f\n", VERSION);
-	Con_Printf ("QuakeSpasm Version " QUAKESPASM_VER_STRING "\n");
+	Con_Printf ("QuakeLOCS Version " QUAKELOCS_VER_STRING "\n");
 	Con_Printf ("Exe: " __TIME__ " " __DATE__ "\n");
 }
 

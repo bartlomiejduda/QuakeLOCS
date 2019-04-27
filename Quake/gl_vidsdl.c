@@ -3,6 +3,7 @@ Copyright (C) 1996-2001 Id Software, Inc.
 Copyright (C) 2002-2009 John Fitzgibbons and others
 Copyright (C) 2007-2008 Kristian Duske
 Copyright (C) 2010-2014 QuakeSpasm developers
+Copyright (C) 2019 Bartlomiej Duda
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -607,7 +608,7 @@ static qboolean VID_SetMode (int width, int height, int refreshrate, int bpp, qb
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, fsaa > 0 ? 1 : 0);
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, fsaa);
 
-	q_snprintf(caption, sizeof(caption), "QuakeSpasm " QUAKESPASM_VER_STRING);
+	q_snprintf(caption, sizeof(caption), "QuakeLOCS " QUAKELOCS_VER_STRING);
 
 #if defined(USE_SDL2)
 	/* Create the window if needed, hidden */

@@ -15,6 +15,12 @@ struct lang_line
 	char  lang[50];		  // "English" by default
 };
 
+struct parameter_config_line
+{
+	char var_name[100];   // "LOCS_Enabled" 
+	int value;			  // '1'
+};
+
 
 struct loc_line
 {
@@ -24,6 +30,9 @@ struct loc_line
 
 struct lang_line line_arr[100]; //max 100 languages
 int lang_counter = 0;
+char q_glob_current_lang[100];
+int q_glob_locs_enabled;
+
 
 
 
@@ -132,13 +141,15 @@ int get_q_global_config()
 	int len = 0;
 	char *current_section = "";
 	int line_counter = 0;
-	char line[500]; 
+	char line[32000];
 	int lang_counter = 0;
 
 	int count_tok1 = 0;
 	int count_tok2 = 0;
 	char p_delim[] = "=";
 	char* ptr_p_delim = p_delim;
+	char p_newlineim[] = "\n";
+	char* ptr_p_newline = p_newlineim;
 
 
 	while (fgets(line, sizeof line, glob_config_file) != NULL) 
@@ -164,19 +175,53 @@ int get_q_global_config()
 
 		if (current_section != NULL && current_section != "")
 		{
+			if (strcmp(str_to_upper(current_section), str_to_upper("Global config")) == 0)
+			{
+				if (strstr(line, current_section) != NULL) // continue if line contains current section
+				{
+					continue;
+				}
+				
+				if (strstr(str_to_upper(line), str_to_upper("LOCS_Enabled")) != NULL) // if line contains word "LOCS_Enabled"
+				{
+					q_glob_locs_enabled = atoi(str_split_and_get_element(str_split_and_get_element(line, ptr_p_delim, 2), ptr_p_newline, 1));
+
+					if (q_glob_locs_enabled == 0)
+					{
+						Con_Printf("LOCS Disabled. \n");
+						return -1;  // LOCS disabled, nothing to do, exiting
+					}
+					else
+					{
+						Con_Printf("LOCS Enabled. \n");
+					}
+						
+				}
+
+				if (strstr(str_to_upper(line), str_to_upper("Default_current_lang")) != NULL) // if line contains word "Default_current_lang"
+				{
+					strcpy(q_glob_current_lang, str_split_and_get_element(str_split_and_get_element(line, ptr_p_delim, 2), ptr_p_newline, 1)); // setting current lang 
+				}
+
+
+
+			}
+
+
+
 			if ( strcmp(str_to_upper(current_section) , str_to_upper("Available langs") ) == 0)
 			{
-				if (strstr(line, current_section) != NULL) 
+				if (strstr(line, current_section) != NULL) // continue if line contains current section
 				{
 					continue;
 				}
 
 
 				struct lang_line a, *pa = &a;
-				strcpy(a.lang_code, str_split_and_get_element(line, ptr_p_delim, 1));
-				strcpy(a.lang, str_split_and_get_element(line, ptr_p_delim, 2));
-				Con_Printf("####lang: %s, lang_code: %s \n", a.lang, a.lang_code);
-
+				strcpy(a.lang_code, str_split_and_get_element(str_split_and_get_element(line, ptr_p_delim, 1), ptr_p_newline, 1)); //getting lang code from line
+				strcpy(a.lang, str_split_and_get_element(str_split_and_get_element(line, ptr_p_delim, 2), ptr_p_newline, 1)); // getting lang from line
+				Con_Printf("####lang: %s, lang_code: %s ####\n", a.lang, a.lang_code);
+				Con_Printf("###");
 				
 			}
 		}
@@ -196,14 +241,70 @@ void LOCS_Init()
 	get_q_global_config();
 }
 
-void get_q_text(char *q_identifier)
+char* get_q__glob_current_lang()
 {
+	return q_glob_current_lang;
+}
+
+void set_q_glob_current_lang(char* input_val)
+{
+	strcpy(q_glob_current_lang, input_val);
+}
+
+int get_q_glob_locs_enabled()
+{
+	return q_glob_locs_enabled;
+}
+
+void set_q_glob_locs_enabled(int input_val)
+{
+	q_glob_locs_enabled = input_val;
+}
+
+char* get_q_text(char *q_identifier, char* input_string)
+{
+	if (get_q_glob_locs_enabled() == 0)  
+		return input_string; //LOCS disabled, return default string
+
+	char* result = "res";
+
+
 	char *q_lang = "";
-	// q_lang = get_q_lang();   <--TODO
+	q_lang = get_q__glob_current_lang();
 
 	if (q_lang == "")
 	{
 		q_lang = "ENG";
 	}
 
+
+	char line[32000];
+	char *path = ".\\LOCS\\ENG\\ENG_engine_text.txt";
+	FILE *text_file = fopen(path, "rt");
+
+
+	
+
+
+	while (fgets(line, sizeof line, text_file) != NULL)
+	{
+		if (strstr(str_to_upper(line), str_to_upper(q_identifier)) != NULL) // if line contains q_identifier
+		{
+			char p_delim[] = "=";
+			char* ptr_p_delim = p_delim;
+			char p_newlineim[] = "\n";
+			char* ptr_p_newline = p_newlineim;
+
+			int len = strlen(line);
+			result = malloc(sizeof(char) * len);
+
+			strcpy(result, str_split_and_get_element(str_split_and_get_element(line, ptr_p_delim, 2), ptr_p_newline, 1)); //getting text
+
+			fclose(text_file);
+			return result;
+		}
+	}
+
+	fclose(text_file);
+	return result;
 }

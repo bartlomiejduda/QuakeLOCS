@@ -3,6 +3,7 @@ Copyright (C) 1996-2001 Id Software, Inc.
 Copyright (C) 2002-2009 John Fitzgibbons and others
 Copyright (C) 2007-2008 Kristian Duske
 Copyright (C) 2010-2017 QuakeSpasm developers
+Copyright (C) 2019 Bartlomiej Duda
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -46,7 +47,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define	QS_STRINGIFY(x)	QS_STRINGIFY_(x)
 
 // combined version string like "0.92.1-beta1"
-#define	QUAKESPASM_VER_STRING	QS_STRINGIFY(QUAKESPASM_VERSION) "." QS_STRINGIFY(QUAKESPASM_VER_PATCH) QUAKESPASM_VER_SUFFIX
+#define	QUAKESPASM_VER_STRING	"0.93.1"
+#define	QUAKELOCS_VER_STRING	"0.93.2"
+
 
 //define	PARANOID			// speed sapping error checking
 

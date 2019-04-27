@@ -1,5 +1,9 @@
 //LOCS main config file
 
+[Global config]
+LOCS_Enabled=1
+Default_current_lang=ENG
+
 [Available langs]
 ENG=English
 PL=Polski
